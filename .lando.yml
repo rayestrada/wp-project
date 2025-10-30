@@ -1,7 +1,7 @@
 name: wp-sba-lando
 recipe: wordpress
 config:
-  php: '8.2'
+  php: '8.3'
   composer_version: '2.7.7'
   webroot: .
   database: mysql
@@ -14,9 +14,14 @@ services:
     build:
       - cp .lando/wp-config-local.php wp-config.php
     run:
-      - bash .lando/run.sh
-events:
-  pre-start:
-    - appserver: composer install
-  post-start:
-    - appserver: bash .lando/post-start.sh
+      - composer install
+      - wp core install --url="http://$LANDO_APP_NAME.lndo.site" --title="WP AVB Template" --admin_user="admin" --admin_password="password" --admin_email="admin@$LANDO_APP_NAME.lndo.site" --skip-email
+tooling:
+  # Custom lando command, to sync with updates, config changes in codebase.
+  sync:
+    service: appserver
+    description: Branch update (run composer, activate themes and plugins).
+    cmd:
+      - composer install
+      - wp plugin activate --all
+      - wp theme activate generatepress

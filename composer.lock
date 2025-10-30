@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "39fb67fefe54f2f0178f297aaec341c1",
+    "content-hash": "848b26e9c7397176357400dd5986565b",
     "packages": [
         {
             "name": "composer/installers",
@@ -151,6 +151,15 @@
                 }
             ],
             "time": "2024-06-24T20:46:46+00:00"
+        },
+        {
+            "name": "wordpress/wordpress",
+            "version": "6.8.3",
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/WordPress/WordPress/archive/refs/tags/6.8.3.zip"
+            },
+            "type": "wordpress-core"
         },
         {
             "name": "wpackagist-plugin/debug-bar",

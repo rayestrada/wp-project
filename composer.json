@@ -5,16 +5,32 @@
         {
             "type": "composer",
             "url": "https://wpackagist.org"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "wordpress/wordpress",
+                "version": "6.8.3",
+                "type": "wordpress-core",
+                "dist": {
+                    "type": "zip",
+                    "url": "https://github.com/WordPress/WordPress/archive/refs/tags/6.8.3.zip"
+                }
+            }
         }
     ],
     "require": {
         "wpackagist-plugin/debug-bar": "1.1.7",
         "wpackagist-plugin/query-monitor": "3.20.0",
-        "wpackagist-theme/generatepress": "3.6.0"
+        "wpackagist-theme/generatepress": "3.6.0",
+        "wordpress/wordpress": "6.8.3"
     },
     "config": {
         "allow-plugins": {
             "composer/installers": true
         }
+    },
+    "scripts": {
+        "post-install-cmd": "cp -r ./vendor/wordpress/wordpress/* ./"
     }
 }

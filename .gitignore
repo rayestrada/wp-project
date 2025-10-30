@@ -7,6 +7,7 @@
 # you can delete this whole section/until Configuration.
 /wp-admin/
 /wp-content/index.php
+/wp-content/db.php
 /wp-content/languages
 /wp-content/plugins/index.php
 /wp-content/themes/index.php
@@ -20,12 +21,6 @@
 # Configuration
 wp-config.php
 
-# Example themes
-/wp-content/themes
-
-# Example plugin
-/wp-content/plugins
-
 # Composer Vendor
 /vendor/
 
@@ -38,14 +33,22 @@ wp-config.php
 # htaccess
 /.htaccess
 
-# All plugins
+# Example plugin
+/wp-content/plugins
+
+# Whitelist plugins
 #
 # Note: If you wish to whitelist plugins,
-# uncomment the next line
-#/wp-content/plugins
+# uncomment the next lines
+# !/wp-content/plugins/
+# !/wp-content/plugins/CustomPluginName
 
-# All themes
+# Example themes
+/wp-content/themes
+
+# Whitelist themes
 #
 # Note: If you wish to whitelist themes,
 # uncomment the next line
-#/wp-content/themes
+# !/wp-content/themes/
+# !/wp-content/themes/CutsomTheme
