@@ -1,0 +1,1 @@
+# Project Template for Lando + WordPress + Composer Environment

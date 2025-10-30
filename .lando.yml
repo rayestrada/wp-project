@@ -1,0 +1,22 @@
+name: wp-sba-lando
+recipe: wordpress
+config:
+  php: '8.2'
+  composer_version: '2.7.7'
+  webroot: .
+  database: mysql
+  cache: redis
+  ssl: false
+  via: nginx
+  xdebug: false
+services:
+  appserver:
+    build:
+      - cp .lando/wp-config-local.php wp-config.php
+    run:
+      - bash .lando/run.sh
+events:
+  pre-start:
+    - appserver: composer install
+  post-start:
+    - appserver: bash .lando/post-start.sh
