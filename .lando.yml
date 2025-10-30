@@ -1,10 +1,10 @@
-name: wp-sba-lando
+name: wp-sbademo
 recipe: wordpress
 config:
   php: '8.3'
   composer_version: '2.7.7'
+  database: mysql:8.0
   webroot: .
-  database: mysql
   cache: redis
   ssl: false
   via: nginx
@@ -12,16 +12,26 @@ config:
 services:
   appserver:
     build:
-      - cp .lando/wp-config-local.php wp-config.php
-    run:
       - composer install
-      - wp core install --url="http://$LANDO_APP_NAME.lndo.site" --title="WP AVB Template" --admin_user="admin" --admin_password="password" --admin_email="admin@$LANDO_APP_NAME.lndo.site" --skip-email
 tooling:
-  # Custom lando command, to sync with updates, config changes in codebase.
+  set:
+    service: appserver
+    description: Set up WordPress config file.
+    cmd:
+      - cp .lando/wp-config-local.php wp-config.php
   sync:
     service: appserver
-    description: Branch update (run composer, activate themes and plugins).
+    description: Sync the local database and uploads with the remote environment.
     cmd:
       - composer install
-      - wp plugin activate --all
-      - wp theme activate generatepress
+      - wp cache flush
+  wpadmin:
+    service: appserver
+    description: Set admin password.
+    cmd:
+      - wp plugin deactivate wordfence-login-security
+      - wp user create wpadmin wpadmin@example.com --role=administrator --user_pass=admin
+events:
+  post-db-import:
+    # replace cloud domain with local domain after importing database
+    - appserver: wp search-replace 'iasdemo.ussba.io' 'wp-sbademo.lndo.site' && wp cache flush

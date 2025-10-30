@@ -27,6 +27,10 @@ wp-config.php
 # Uploads
 /wp-content/uploads/
 
+# DB backups
+*.sql
+*.sql.gz
+
 # Log files
 *.log
 
@@ -34,21 +38,19 @@ wp-config.php
 /.htaccess
 
 # Example plugin
-/wp-content/plugins
+/wp-content/plugins/*
 
 # Whitelist plugins
 #
 # Note: If you wish to whitelist plugins,
 # uncomment the next lines
-# !/wp-content/plugins/
 # !/wp-content/plugins/CustomPluginName
 
 # Example themes
-/wp-content/themes
+/wp-content/themes/*
 
 # Whitelist themes
 #
 # Note: If you wish to whitelist themes,
 # uncomment the next line
-# !/wp-content/themes/
-# !/wp-content/themes/CutsomTheme
+!/wp-content/themes/sbademo/
